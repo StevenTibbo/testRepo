@@ -1,8 +1,15 @@
-const http = require('http');
+var http = require('http'),
+    fileSystem = require('fs'),
+    path = require('path');
 
 const server = http.createServer(function(request, response) {
-    response.writeHead(200, { "Content-Type": "text/html" });
-    response.end("<html><body><h1>Hello!</h1></body></html>");
+    response.writeHead(200, {
+        'Content-Type': 'application/octet-stream',
+        'Content-Length': stat.size
+    });
+    
+    var readStream = fileSystem.createReadStream(filePath);
+    readStream.pipe(response);
 });
 
 const port = process.env.PORT || 1337;
